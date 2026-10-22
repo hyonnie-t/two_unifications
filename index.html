@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script src="https://hyonnie-t.github.io/history26/snippets/portal_auth.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이탈리아·독일의 통일 비교</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="previewBar" class="preview-bar" hidden>미리보기 모드 — 저장되지 않아</div>
+<main class="page">
+  <header class="book-head">
+    <div class="eyebrow">세계사 주제31 · 교과서 154~155쪽</div>
+    <h1>이탈리아·독일의 통일 비교</h1>
+    <ol id="steps" class="steps" aria-label="진행 단계" hidden>
+      <li data-k="find"><span>1</span><b id="findLabel">찾기 1/2</b></li>
+      <li data-k="compare"><span>2</span><b>비교</b></li>
+      <li data-k="write"><span>3</span><b>쓰기</b></li>
+      <li data-k="wrap"><span>4</span><b>마무리</b></li>
+    </ol>
+  </header>
+
+  <!-- 시작 -->
+  <section id="s0" class="screen">
+    <div class="card">
+      <h2>시작하기</h2>
+      <p class="note">두 나라의 통일 과정을 시간순으로 맞추고, 같은 점과 다른 점을 찾아보자.</p>
+      <label for="sid">학번 (5자리, 예: 20512)</label>
+      <input id="sid" inputmode="numeric" maxlength="5" autocomplete="off" data-no-draft>
+      <label for="sname">이름</label>
+      <input id="sname" autocomplete="off" data-no-draft>
+      <p id="startErr" class="err" role="alert"></p>
+      <button id="startBtn" class="btn wide">시작</button>
+    </div>
+  </section>
+
+  <!-- 1·2. 찾기 (이탈리아, 독일) -->
+  <section id="s1" class="screen" hidden>
+    <div class="card tone-ita">
+      <div class="tag" id="s1Tag"></div>
+      <h2 id="s1Title"></h2>
+      <p class="note">먼저 일어난 일이 맨 위로 오게 놓아 봐. 왼쪽 ☰를 끌어 옮기거나 ▲▼ 버튼을 눌러.</p>
+      <ol id="s1List" class="cards"></ol>
+      <div class="hint-wrap" id="s1Hint"></div>
+      <p id="s1Msg" class="msg" role="status" aria-live="polite"></p>
+    </div>
+    <div class="btn-row nav">
+      <button id="s1Back" class="btn ghost" type="button">이전</button>
+      <button id="s1Check" class="btn" type="button">순서 확인</button>
+      <button id="s1Next" class="btn" type="button" hidden>다음</button>
+    </div>
+  </section>
+
+  <section id="s2" class="screen" hidden>
+    <div class="card tone-ger">
+      <div class="tag" id="s2Tag"></div>
+      <h2 id="s2Title"></h2>
+      <p class="note">먼저 일어난 일이 맨 위로 오게 놓아 봐. 왼쪽 ☰를 끌어 옮기거나 ▲▼ 버튼을 눌러.</p>
+      <ol id="s2List" class="cards"></ol>
+      <div class="hint-wrap" id="s2Hint"></div>
+      <p id="s2Msg" class="msg" role="status" aria-live="polite"></p>
+    </div>
+    <div class="btn-row nav">
+      <button id="s2Back" class="btn ghost" type="button">이전</button>
+      <button id="s2Check" class="btn" type="button">순서 확인</button>
+      <button id="s2Next" class="btn" type="button" hidden>다음</button>
+    </div>
+  </section>
+
+  <!-- 3. 비교 -->
+  <section id="s3" class="screen" hidden>
+    <div class="card">
+      <h2>두 줄을 나란히 보자</h2>
+      <p class="note">맞춘 순서야. 두 줄을 비교해서 같은 점 1개, 다른 점 1개를 찾아 써 줘.</p>
+      <div class="two-col">
+        <div class="col tone-ita">
+          <div class="tag" id="colItaTag"></div>
+          <ol id="colIta" class="lines"></ol>
+        </div>
+        <div class="col tone-ger">
+          <div class="tag" id="colGerTag"></div>
+          <ol id="colGer" class="lines"></ol>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="cmpBox"></div>
+    <div class="btn-row nav">
+      <button id="s3Back" class="btn ghost" type="button">이전</button>
+      <button id="s3Next" class="btn" type="button">다음</button>
+    </div>
+    <p id="s3Err" class="err" role="alert"></p>
+  </section>
+
+  <!-- 4. 쓰기 -->
+  <section id="s4" class="screen" hidden>
+    <div id="frameNote" class="frame-note" role="note"></div>
+    <div class="card material">
+      <h3 id="boxTitle"></h3>
+      <p id="boxText" class="material-text"></p>
+      <div class="nation">
+        <b id="nationTerm" data-no-gloss></b>
+        <span id="nationText"></span>
+      </div>
+    </div>
+    <div id="writeBox"></div>
+    <div class="btn-row nav">
+      <button id="s4Back" class="btn ghost" type="button">이전</button>
+      <button id="s4Next" class="btn" type="button">다음</button>
+    </div>
+    <p id="s4Err" class="err" role="alert"></p>
+  </section>
+
+  <!-- 5. 마무리 -->
+  <section id="s5" class="screen" hidden>
+    <div class="card">
+      <h2>내 답 확인</h2>
+      <p class="note">천천히 읽어 보고, 고치고 싶으면 이전으로 돌아가.</p>
+      <div id="wrapBox" class="wrap-box"></div>
+      <p id="s5Err" class="err" role="alert"></p>
+      <div class="btn-row">
+        <button id="submitBtn" class="btn" type="button">제출</button>
+        <button id="copyBtn" class="btn ghost" type="button">글 복사</button>
+      </div>
+      <p id="outMsg" class="note" role="status" aria-live="polite"></p>
+      <div class="padlet-box">
+        <p class="padlet-guide">제출하고 나서 <b>글 복사</b>를 누르고, 우리 반 패들렛에 붙여넣어 올려 줘.</p>
+        <a id="padletBtn" class="btn ghost wide" target="_blank" rel="noopener" hidden>우리 반 패들렛 열기</a>
+        <p id="padletMsg" class="note"></p>
+      </div>
+    </div>
+    <div class="btn-row nav">
+      <button id="s5Back" class="btn ghost" type="button">이전</button>
+    </div>
+  </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script src="focus_guard.js"></script>
+<script src="glossary.js"></script>
+<script src="draft_guard.js"></script>
+<script src="data.js"></script>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
