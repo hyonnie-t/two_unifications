@@ -1,13 +1,12 @@
-/* 색: 역사책 페이지 — 누런 종이에 먹색 글, 강조는 낡은 갈색 인장.
-   두 나라 줄은 국기색 대신 채도 낮은 두 톤: 이탈리아 = 올리브빛 회녹, 독일 = 슬레이트빛 보라회색.
-   (빈 체제 역할 일기의 하늘·장미·겨자 배색과 겹치지 않게 골랐다.)
+/* 색: 19세기 지도책 — 옅은 양피지 바탕에 먹색 글, 강조는 프로이센·사르데냐의 군청색.
+   두 나라 줄은 국기에서 따온 톤: 이탈리아 = 초록, 독일 = 철(鐵)빛 회색, 금색은 독일 제국 깃발의 포인트로만 쓴다.
    본문은 세리프(Noto Serif KR), 라벨·버튼만 산세리프. 괘선은 얇게, 모서리는 4~6px, 그림자는 옅게. */
 :root{
-  --paper:#f1ebdd;--page:#fbf8ef;--ink:#2a2622;--muted:#6b645a;--line:#d6ccb4;
-  --umber:#6b4f32;--umber-deep:#4f3922;--umber-wash:#efe5d3;
-  --ita:#5f7357;--ita-wash:#e8ede2;--ita-line:#b9c6ae;
-  --ger:#665f80;--ger-wash:#ebe8f0;--ger-line:#c4bfd3;
-  --brick:#8f4538;--ok:#4a6b4c;
+  --paper:#edeae0;--page:#fbfaf6;--ink:#222831;--muted:#5d6570;--line:#d2cfc2;
+  --navy:#2b4a6f;--navy-deep:#1e3552;--navy-wash:#e5ebf3;--gold:#b58a2c;
+  --ita:#3d7050;--ita-wash:#e6f0e8;--ita-line:#adccb6;
+  --ger:#4a4e5a;--ger-wash:#ebecf0;--ger-line:#c2c5cd;
+  --brick:#9a3a30;--ok:#3d7050;--seal:#8f3a30;
   --serif:"Noto Serif KR","Batang",serif;--sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif
 }
 *{box-sizing:border-box}
@@ -18,8 +17,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
 .preview-bar{background:var(--brick);color:#fff;text-align:center;padding:6px;font:16px var(--sans)}
 
 /* 머리 */
-.book-head{padding:14px 0 4px}
-.eyebrow{display:inline-block;font:500 16px var(--sans);color:var(--umber);border-bottom:2px solid var(--umber);padding-bottom:1px;letter-spacing:.02em}
+.book-head{padding:14px 0 4px;border-top:5px solid;border-image:linear-gradient(90deg,var(--ita) 50%,var(--ger) 50%) 1;margin-top:4px}
+.eyebrow{display:inline-block;font:500 16px var(--sans);color:var(--navy);border-bottom:2px solid var(--gold);padding-bottom:1px;letter-spacing:.02em}
 h1{font:700 1.7rem/1.35 var(--serif);margin:10px 0 14px;color:var(--ink)}
 h2{font:700 1.3rem/1.4 var(--serif);margin:6px 0 8px}
 h3{font:700 1.1rem/1.5 var(--serif);margin:0 0 6px}
@@ -27,25 +26,25 @@ h3{font:700 1.1rem/1.5 var(--serif);margin:0 0 6px}
 .steps li{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 4px;border-top:3px solid var(--line);background:transparent;color:var(--muted);font:500 16px var(--sans)}
 .steps li span{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;font-size:14px;flex:none}
 .steps li b{font-weight:500}
-.steps li.on{border-top-color:var(--umber);color:var(--umber-deep);font-weight:700}
+.steps li.on{border-top-color:var(--navy);color:var(--navy-deep);font-weight:700}
 .steps li.on b{font-weight:700}
-.steps li.on span{background:var(--umber);border-color:var(--umber);color:#fff}
-.steps li.done{border-top-color:var(--umber);color:var(--umber)}
-.steps li.done span{background:var(--umber-wash)}
+.steps li.on span{background:var(--navy);border-color:var(--navy);color:#fff}
+.steps li.done{border-top-color:var(--navy);color:var(--navy)}
+.steps li.done span{background:var(--navy-wash)}
 
 /* 카드(종이) */
-.card{background:var(--page);border:1px solid var(--line);border-radius:6px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(60,40,10,.08)}
+.card{background:var(--page);border:1px solid var(--line);border-radius:6px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(30,45,70,.08)}
 .note{color:var(--muted);margin:0 0 12px;font-size:16px}
 label{display:block;margin:12px 0 4px;font:500 16px var(--sans)}
-input,textarea{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:1px solid #c4b898;border-radius:4px;background:#fff;color:var(--ink)}
+input,textarea{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:1px solid #b9bfc8;border-radius:4px;background:#fff;color:var(--ink)}
 textarea{resize:vertical}
-input:focus,textarea:focus,button:focus-visible,summary:focus-visible,a:focus-visible,.choice:focus-within{outline:3px solid #cdb98f;outline-offset:1px}
+input:focus,textarea:focus,button:focus-visible,summary:focus-visible,a:focus-visible,.choice:focus-within{outline:3px solid #8fb0d6;outline-offset:1px}
 
 /* 버튼 */
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:10px 22px;font:700 1.05rem var(--sans);color:#fff;background:var(--umber);border:1px solid var(--umber-deep);border-radius:5px;cursor:pointer;text-decoration:none;margin-top:12px}
-.btn:hover{background:var(--umber-deep)}
-.btn.ghost{background:transparent;color:var(--umber-deep);border-color:#bda98a}
-.btn.ghost:hover{background:var(--umber-wash)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:10px 22px;font:700 1.05rem var(--sans);color:#fff;background:var(--navy);border:1px solid var(--navy-deep);border-radius:5px;cursor:pointer;text-decoration:none;margin-top:12px}
+.btn:hover{background:var(--navy-deep)}
+.btn.ghost{background:transparent;color:var(--navy-deep);border-color:#aab6c6}
+.btn.ghost:hover{background:var(--navy-wash)}
 .btn.wide{width:100%}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap}
@@ -72,21 +71,21 @@ input:focus,textarea:focus,button:focus-visible,summary:focus-visible,a:focus-vi
 .card-text{margin:0;font-size:17px}
 .pg{color:var(--muted);font:500 15px var(--sans);white-space:nowrap}
 .mv{flex:none;display:flex;flex-direction:column;gap:6px;justify-content:center}
-.mv-btn{width:46px;height:44px;font:16px var(--sans);color:var(--umber-deep);background:#fff;border:1px solid #bda98a;border-radius:4px;cursor:pointer;padding:0}
+.mv-btn{width:46px;height:44px;font:16px var(--sans);color:var(--navy-deep);background:#fff;border:1px solid #aab6c6;border-radius:4px;cursor:pointer;padding:0}
 .mv-btn:disabled{opacity:.35;cursor:default}
 .card-item.ghost{opacity:.4}
-.card-item.chosen{box-shadow:0 3px 10px rgba(60,40,10,.2)}
+.card-item.chosen{box-shadow:0 3px 10px rgba(30,45,70,.2)}
 .cards.locked .grip,.cards.locked .mv{display:none}
 .cards.locked .card-item{padding-left:12px}
 .msg{min-height:1.4em;margin:14px 0 0;font:500 16px/1.5 var(--sans)}
 .msg.bad{color:var(--brick)}
 .msg.ok{color:var(--ok)}
-.msg.info{color:var(--umber-deep)}
+.msg.info{color:var(--navy-deep)}
 
 /* 힌트 */
 .hint-wrap{margin-top:12px}
-.hint{margin:0 0 10px;padding:0 14px;background:var(--umber-wash);border-radius:5px}
-.hint summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font:500 16px var(--sans);color:var(--umber-deep)}
+.hint{margin:0 0 10px;padding:0 14px;background:var(--navy-wash);border-radius:5px}
+.hint summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font:500 16px var(--sans);color:var(--navy-deep)}
 .hint p{margin:0 0 12px;font-size:16px}
 
 /* 3. 비교 */
@@ -102,27 +101,27 @@ input:focus,textarea:focus,button:focus-visible,summary:focus-visible,a:focus-vi
 textarea.plain{min-height:68px}
 
 /* 4. 쓰기 */
-.frame-note{position:sticky;top:0;z-index:5;margin:0 0 14px;padding:10px 14px;background:var(--umber-wash);border:1px solid #bda98a;border-left:5px solid var(--umber);border-radius:4px;color:var(--umber-deep);font:700 16px/1.55 var(--sans);box-shadow:0 2px 6px rgba(60,40,10,.12)}
-.material{background:#fffdf6}
+.frame-note{position:sticky;top:0;z-index:5;margin:0 0 14px;padding:10px 14px;background:var(--navy-wash);border:1px solid #aab6c6;border-left:5px solid var(--navy);border-radius:4px;color:var(--navy-deep);font:700 16px/1.55 var(--sans);box-shadow:0 2px 6px rgba(30,45,70,.12)}
+.material{background:#fdfcf8}
 .material-text{margin:0 0 12px}
-.nation{padding:10px 14px;background:var(--umber-wash);border-radius:4px;font-size:16px}
+.nation{padding:10px 14px;background:var(--navy-wash);border-radius:4px;font-size:16px}
 .nation b{display:block;font-family:var(--sans);margin-bottom:2px}
 .choices{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 10px}
-.choice{flex:1 1 200px;display:flex;align-items:center;gap:10px;margin:0;min-height:52px;padding:10px 14px;border:1px solid #bda98a;border-radius:5px;background:#fff;cursor:pointer;font:500 17px var(--serif)}
-.choice input{width:22px;height:22px;flex:none;margin:0;accent-color:var(--umber)}
-.choice:has(input:checked){background:var(--umber-wash);border-color:var(--umber);box-shadow:inset 0 0 0 1px var(--umber)}
+.choice{flex:1 1 200px;display:flex;align-items:center;gap:10px;margin:0;min-height:52px;padding:10px 14px;border:1px solid #aab6c6;border-radius:5px;background:#fff;cursor:pointer;font:500 17px var(--serif)}
+.choice input{width:22px;height:22px;flex:none;margin:0;accent-color:var(--navy)}
+.choice:has(input:checked){background:var(--navy-wash);border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
 .lock-note{margin:0;color:var(--muted);font:16px var(--sans)}
 textarea.lined{font-size:18px;line-height:34px;padding:4px 8px 0;border:0;border-radius:0;background:transparent;
-  background-image:repeating-linear-gradient(transparent 0 33px,#d6ccb4 33px 34px);background-attachment:local;min-height:104px}
-textarea.lined:focus{outline:0;background-color:#fffbe8}
+  background-image:repeating-linear-gradient(transparent 0 33px,#d3d8df 33px 34px);background-attachment:local;min-height:104px}
+textarea.lined:focus{outline:0;background-color:#f3f7fc}
 .count{color:var(--muted);font:15px var(--sans);text-align:right;margin-top:2px}
 
 /* 5. 마무리 */
-.wrap-box{border:1px solid var(--line);border-left:8px solid var(--umber);border-radius:4px 6px 6px 4px;background:#fffdf6;padding:14px 16px 6px}
+.wrap-box{border:1px solid var(--line);border-left:8px solid var(--navy);border-radius:4px 6px 6px 4px;background:#fdfcf8;padding:14px 16px 6px}
 .wrap-sec{margin-bottom:12px}
-.wrap-sec h3{font:700 16px var(--sans);color:var(--umber-deep);border-bottom:1px solid var(--line);padding-bottom:3px;margin-bottom:6px}
+.wrap-sec h3{font:700 16px var(--sans);color:var(--navy-deep);border-bottom:1px solid var(--line);padding-bottom:3px;margin-bottom:6px}
 .wrap-sec p{margin:0 0 4px;white-space:pre-wrap}
-.padlet-box{margin-top:18px;padding:14px;background:var(--umber-wash);border-radius:5px}
+.padlet-box{margin-top:18px;padding:14px;background:var(--navy-wash);border-radius:5px}
 .padlet-guide{margin:0 0 4px;font-size:16px}
 
 @media (min-width:720px){
@@ -141,3 +140,12 @@ textarea.lined:focus{outline:0;background-color:#fffbe8}
   .mv-btn{flex:1;max-width:120px}
   .cards.locked .card-item{padding-left:12px}
 }
+
+/* 고침: 쓰기 카드는 .part의 좌우 0 패딩에 덮여 글이 테두리에 붙었다 → 카드 안쪽 여백 복원 */
+.card.part{padding:18px 18px 14px}
+.card.part .choices{margin-top:8px}
+/* 고침: 낱말 풀이 밑줄이 붉은 굵은 글씨라 오타 표시처럼 보였다 → 가늘고 조용하게 */
+body .term{font-weight:600;color:var(--navy-deep);text-decoration:underline dotted;text-decoration-thickness:1.5px;text-decoration-color:var(--gold)}
+/* 고침: 비교 화면 번호가 글줄과 따로 놀지 않게 */
+.lines{padding-left:1.7em}
+.lines li::marker{color:var(--muted);font-family:var(--sans);font-size:.9em}
