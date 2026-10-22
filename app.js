@@ -292,12 +292,12 @@ function buildWrites() {
 
     const store = el("input"); // 고른 선택을 임시저장에 태우는 숨은 칸(draft_guard가 data-draft 칸을 저장·복원한다)
     store.type = "hidden"; store.id = w.id + "Store"; store.setAttribute("data-draft", w.id + "Choice");
-    card.appendChild(store);
+    if (hasChoice(w)) card.appendChild(store);
 
     const grp = el("div", "choices");
     grp.setAttribute("role", "radiogroup");
     grp.setAttribute("aria-labelledby", h.id);
-    w.choices.forEach(label => {
+    (w.choices || []).forEach(label => {
       const lb = el("label", "choice");
       const r = el("input");
       r.type = "radio"; r.name = w.id; r.value = label;
@@ -306,15 +306,13 @@ function buildWrites() {
       lb.appendChild(el("span", "", label));
       grp.appendChild(lb);
     });
-    card.appendChild(grp);
-
     const lock = el("p", "lock-note", "먼저 위에서 하나를 골라 줘. 그러면 쓰는 칸이 열려.");
     lock.id = w.id + "Lock";
-    card.appendChild(lock);
+    if (hasChoice(w)) { card.appendChild(grp); card.appendChild(lock); }
 
     const area = el("div", "write-area");
     area.id = w.id + "Area";
-    area.hidden = true;
+    area.hidden = hasChoice(w); // 선택이 없는 문항은 처음부터 열려 있다
     area.appendChild(el("p", "part-guide", w.guide));
     area.appendChild(hintEl(w.hint));
     const ta = el("textarea", "lined");
@@ -328,10 +326,12 @@ function buildWrites() {
     area.appendChild(cnt);
     card.appendChild(area);
 
-    store.addEventListener("input", () => restoreChoice(w, store)); // 임시저장 복원 때 선택도 되살린다
+    if (hasChoice(w)) store.addEventListener("input", () => restoreChoice(w, store)); // 임시저장 복원 때 선택도 되살린다
     wrap.appendChild(card);
   });
 }
+
+function hasChoice(w) { return Array.isArray(w.choices) && w.choices.length > 0; }
 
 function unlockWrite(w) {
   $(w.id + "Lock").hidden = true;
@@ -353,14 +353,15 @@ function restoreChoice(w, store) {
 }
 
 function chosenOf(w) {
+  if (!hasChoice(w)) return "";
   const r = document.querySelector('input[name="' + w.id + '"]:checked');
   return r ? r.value : "";
 }
-function outLabelOf(w) { return w.outLabel[w.choices.indexOf(chosenOf(w))] || ""; }
+function outLabelOf(w) { return hasChoice(w) ? (w.outLabel[w.choices.indexOf(chosenOf(w))] || "") : w.outLabel; }
 
 function checkWrites() {
   for (const w of WRITES) {
-    if (!chosenOf(w)) return w.num + "에서 하나를 골라 줘.";
+    if (hasChoice(w) && !chosenOf(w)) return w.num + "에서 하나를 골라 줘.";
     if (val(w.id + "Text").length < w.min) return w.num + " 칸을 조금 더 써 줘. (" + w.min + "자 이상)";
   }
   return "";
@@ -375,7 +376,7 @@ function buildReflection() {
     "[비교]",
     "같은 점: " + oneLine(val("cmpSame")),
     "다른 점: " + oneLine(val("cmpDiff")),
-    "[국민 국가였을까] " + writeLine(WRITES[0]),
+    "[지금도 국민 국가일까] " + writeLine(WRITES[0]),
     "[해결] " + writeLine(WRITES[1])
   ].join("\n");
 }
@@ -394,7 +395,7 @@ function renderWrap() {
   const box = $("wrapBox");
   box.innerHTML = "";
   box.appendChild(wrapSection("[비교]", ["같은 점: " + oneLine(val("cmpSame")), "다른 점: " + oneLine(val("cmpDiff"))]));
-  box.appendChild(wrapSection("[국민 국가였을까]", [writeLine(WRITES[0])]));
+  box.appendChild(wrapSection("[지금도 국민 국가일까]", [writeLine(WRITES[0])]));
   box.appendChild(wrapSection("[해결]", [writeLine(WRITES[1])]));
   $("submitBtn").disabled = S.submitted;
   $("submitBtn").textContent = S.submitted ? "제출 완료" : "제출";
@@ -418,7 +419,7 @@ async function submitAll() {
   S.sending = true; $("submitBtn").disabled = true; $("submitBtn").textContent = "보내는 중…";
   const payload = {
     studentId: S.sid, studentName: S.name, gameName: CONFIG.GAME_NAME,
-    choiceSummary: "국민 국가: " + outLabelOf(WRITES[0]) + " / 해결: " + outLabelOf(WRITES[1]), diffSummary: "",
+    choiceSummary: "국민 국가: " + outLabelOf(WRITES[0]) + " / 해결: 직접 서술", diffSummary: "",
     reflection: buildReflection(), // 시트 G열: 비교 + 쓰기 합본
     choicesJson: JSON.stringify({
       sid: S.sid, name: S.name, ban: S.ban,
